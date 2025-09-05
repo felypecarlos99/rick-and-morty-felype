@@ -7,13 +7,13 @@ export default function App() {
       <h1>Personagem Rick and Morty</h1>
       <div className="card">
         <img
-          src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-          alt="Rick Sanchez"
+          src="https://rickandmortyapi.com/api/character/avatar/7.jpeg"
+          alt="Abradolf Lincler"
         />
-        <h2>Rick Sanchez</h2>
-        <p><strong>Status:</strong> Alive</p>
-        <p><strong>Espécie:</strong> Human</p>
-        <p><strong>Gênero:</strong> Male</p>
+        <h2>Abradolf Lincler</h2>
+        <p><strong>Status:</strong> Morto</p>
+        <p><strong>Espécie:</strong> Humano Geneticamente Modificado</p>
+        <p><strong>Gênero:</strong> Masculino</p>
         <p><strong>Último episódio:</strong> Rickmurai Jack</p>
       </div>
     </div>
