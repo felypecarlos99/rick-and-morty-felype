@@ -3,44 +3,24 @@ import "./App.css";
 
 export default function App() {
   const [character, setCharacter] = useState(null);
-  const [id, setId] = useState(1);
+  const [count, setCount] = useState(825);
 
-
-  const fetchCharacter = () => {
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then(res => res.json())
-      .then(data => {
- 
-        const lastEpisodeUrl = data.episode[data.episode.length - 1];
-        fetch(lastEpisodeUrl)
-          .then(res => res.json())
-          .then(episodeData => {
-            setCharacter({
-              name: data.name,
-              status: data.status,
-              species: data.species,
-              gender: data.gender,
-              image: data.image,
-              lastEpisode: episodeData.name,
-            });
-          });
-      })
-      .catch(error => console.log("Erro ao buscar personagem:", error));
+  const soma = () => {
+    if (count + 1 <= 826) {
+      setCount(count + 1);
+    } else {
+      setCount(1);
+    }
   };
 
-  // Buscar personagem quando a página carrega ou o ID muda
   useEffect(() => {
-    fetchCharacter();
-  }, [id]);
-
-  // UseEffect do professor (mantido exatamente como ele pediu)
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api')
-      .then(res => console.log('res'))
-      .catch(error => console.log('error'))
-  }, []);
-
-  const handleNextCharacter = () => setId(prevId => prevId + 1);
+    fetch(`https://rickandmortyapi.com/api/character/${count}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCharacter(data); 
+      })
+      .catch((error) => console.log('error'));
+  }, [count]);
 
   return (
     <div className="app">
@@ -53,13 +33,13 @@ export default function App() {
           <p><strong>Status:</strong> {character.status}</p>
           <p><strong>Espécie:</strong> {character.species}</p>
           <p><strong>Gênero:</strong> {character.gender}</p>
-          <p><strong>Último episódio:</strong> {character.lastEpisode}</p>
+          <p><strong>Último episódio:</strong> {character.episode.length > 0 ? character.episode[character.episode.length - 1] : 'N/A'}</p>
         </div>
       ) : (
         <p>Carregando personagem...</p>
       )}
 
-      <button onClick={handleNextCharacter}>Trocar de Usuário</button>
+      <button onClick={soma}>Trocar de Usuário</button>
     </div>
   );
 }
